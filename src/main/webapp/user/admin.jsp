@@ -18,6 +18,7 @@
 
 <main>
     <h1>Bienvenue, ${sessionScope.utilisateur.prenom} ${sessionScope.utilisateur.nom}</h1>
+    <h2>sur notre site web</h2>
 
     <form action="${pageContext.request.contextPath}/deconnexion" method="post">
         <button type="submit">Déconnexion</button>
