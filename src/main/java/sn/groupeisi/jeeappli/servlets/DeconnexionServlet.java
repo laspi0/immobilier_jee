@@ -18,6 +18,6 @@ public class DeconnexionServlet extends HttpServlet {
         if (session != null) {
             session.invalidate(); // Invalide la session
         }
-        response.sendRedirect("user/connexion.jsp"); // Redirige vers la page de connexion
+        response.sendRedirect("/connexion"); // Redirige vers la page de connexion
     }
 }
