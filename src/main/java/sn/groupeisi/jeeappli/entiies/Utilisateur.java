@@ -14,6 +14,9 @@ public class Utilisateur {
     @Column(name = "nom")
     private String nom;
 
+    public Utilisateur() {
+        this.status = "actif";
+    }
     @Column(name = "prenom")
     private String prenom;
 
@@ -22,6 +25,8 @@ public class Utilisateur {
 
     @Column(name = "motDePasse")
     private String motDePasse;
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "role")
     private String role;

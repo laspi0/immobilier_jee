@@ -12,6 +12,10 @@ import sn.groupeisi.jeeappli.entiies.Utilisateur;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+// ...
+
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
 
@@ -38,12 +42,15 @@ public class InscriptionServlet extends HttpServlet {
         String motDePasse = request.getParameter("motDePasse");
         String role = request.getParameter("role");
 
-        // Création d'un nouvel utilisateur
+        // Hashage du mot de passe
+        String motDePasseHash = BCrypt.hashpw(motDePasse, BCrypt.gensalt());
+
+        // Création d'un nouvel utilisateur avec le mot de passe hashé
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setNom(nom);
         utilisateur.setPrenom(prenom);
         utilisateur.setEmail(email);
-        utilisateur.setMotDePasse(motDePasse);
+        utilisateur.setMotDePasse(motDePasseHash);
         utilisateur.setRole(role);
 
         // Inscription de l'utilisateur

@@ -30,7 +30,7 @@ public class UtilisateurDAO {
         }
     }
 
-    public Utilisateur trouverParEmail(String email) {
+    public Utilisateur getByEmail(String email) {
         try (Session session = sessionFactory.openSession()) {
             Query<Utilisateur> query = session.createQuery("FROM Utilisateur WHERE email = :email", Utilisateur.class);
             query.setParameter("email", email);
