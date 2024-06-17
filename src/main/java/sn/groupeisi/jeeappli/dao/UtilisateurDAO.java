@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import sn.groupeisi.jeeappli.entiies.Utilisateur;
 
+import java.util.List;
+
 public class UtilisateurDAO {
 
     private final SessionFactory sessionFactory;
@@ -39,5 +41,18 @@ public class UtilisateurDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<Utilisateur> getAllNonAdminUsers() {
+        Session session = sessionFactory.openSession();
+        List<Utilisateur> utilisateurs = null;
+        try {
+            String hql = "FROM Utilisateur WHERE role != 'admin'";
+            Query<Utilisateur> query = session.createQuery(hql, Utilisateur.class);
+            utilisateurs = query.getResultList();
+        } finally {
+            session.close();
+        }
+        return utilisateurs;
     }
 }
