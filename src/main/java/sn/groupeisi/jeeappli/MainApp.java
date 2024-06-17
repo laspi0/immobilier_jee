@@ -10,27 +10,18 @@ import java.util.List;
 
 public class MainApp {
 
-    public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        // Instanciation du DAO
+    public static void main(String[] args) {
+        // Initialiser la sessionFactory
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO(sessionFactory);
 
-        // Appel de la méthode pour récupérer les utilisateurs non-admin
-        List<Utilisateur> utilisateurs = utilisateurDAO.getAllNonAdminUsers();
+        // Exemple : Inverser le statut de l'utilisateur avec l'ID 1
+        utilisateurDAO.toggleUserStatusById(4);
 
-        // Affichage des résultats
-        System.out.println("Liste des utilisateurs non-admin:");
-        for (Utilisateur utilisateur : utilisateurs) {
-            System.out.println("ID: " + utilisateur.getId() +
-                    ", Nom: " + utilisateur.getNom() +
-                    ", Prénom: " + utilisateur.getPrenom() +
-                    ", Email: " + utilisateur.getEmail() +
-                    ", Rôle: " + utilisateur.getRole());
-        }
-
-        // Fermeture de la SessionFactory
+        // Fermer la sessionFactory
         sessionFactory.close();
     }
+
 }
 

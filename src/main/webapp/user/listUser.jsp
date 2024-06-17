@@ -28,6 +28,7 @@
             <th>Prénom</th>
             <th>Email</th>
             <th>Rôle</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -42,13 +43,23 @@
             <td><%= utilisateur.getPrenom() %></td>
             <td><%= utilisateur.getEmail() %></td>
             <td><%= utilisateur.getRole() %></td>
+            <td>
+                <form action="${pageContext.request.contextPath}/toggleUserStatus" method="post" style="display:inline;">
+                    <input type="hidden" name="userId" value="<%= utilisateur.getId() %>">
+                    <% if ("actif".equals(utilisateur.getStatus())) { %>
+                    <button type="submit">Désactiver</button>
+                    <% } else { %>
+                    <button type="submit">Activer</button>
+                    <% } %>
+                </form>
+            </td>
         </tr>
         <%
             }
         } else {
         %>
         <tr>
-            <td colspan="5">Aucun utilisateur trouvé</td>
+            <td colspan="6">Aucun utilisateur trouvé</td>
         </tr>
         <%
             }

@@ -55,4 +55,30 @@ public class UtilisateurDAO {
         }
         return utilisateurs;
     }
+
+    public void toggleUserStatusById(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Utilisateur utilisateur = session.get(Utilisateur.class, id);
+            if (utilisateur != null) {
+                // Inverser le statut
+                if ("actif".equals(utilisateur.getStatus())) {
+                    utilisateur.setStatus("inactif");
+                } else {
+                    utilisateur.setStatus("actif");
+                }
+                session.update(utilisateur);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }
