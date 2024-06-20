@@ -91,13 +91,28 @@ public class ImmeubleDAO {
     }
 
 
-    public Immeuble obtenirImmeubleParId(int id) {
+    public Immeuble obtenirImmeubleAvecEquipements(int immeubleId) {
         try (Session session = sessionFactory.openSession()) {
-            Immeuble immeuble = session.get(Immeuble.class, id);
-            return immeuble;
+            return session.createQuery(
+                            "SELECT i FROM Immeuble i JOIN FETCH i.equipements WHERE i.id = :id", Immeuble.class)
+                    .setParameter("id", immeubleId)
+                    .uniqueResult();
+        }
+    }
+
+    public void modifierImmeuble(Immeuble immeuble) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.update(immeuble);
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
-        return null;
     }
+
+
 }

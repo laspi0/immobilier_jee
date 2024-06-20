@@ -59,6 +59,10 @@
                 <input type="hidden" name="immeubleId" value="<%= immeuble.getId() %>">
                 <button type="submit">Supprimer</button>
             </form>
+            <form action="${pageContext.request.contextPath}/modifierImmeuble" method="get">
+                <input type="hidden" name="immeubleId" value="<%= immeuble.getId() %>">
+                <button type="submit">Modifier</button>
+            </form>
         </td>
     </tr>
     <%
