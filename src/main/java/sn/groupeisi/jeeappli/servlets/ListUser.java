@@ -36,4 +36,6 @@ public class ListUser extends HttpServlet {
         session.setAttribute("utilisateurs", utilisateurs);
         request.getRequestDispatcher("user/listUser.jsp").forward(request, response);
     }
+
+
 }

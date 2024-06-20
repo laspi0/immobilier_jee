@@ -2,25 +2,11 @@
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des Utilisateurs Non-Admin</title>
-</head>
-<body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="admin.jsp">Accueil</a></li>
-            <!-- Autres liens de navigation pour l'administration -->
-        </ul>
-    </nav>
-</header>
+<%@ include file="header.jsp" %>
 
-<main>
-    <h1>Liste des Utilisateurs Non-Admin</h1>
-    <table border="1">
+
+
+    <table  class="table table-hover">
         <thead>
         <tr>
             <th>ID</th>
@@ -47,9 +33,9 @@
                 <form action="${pageContext.request.contextPath}/toggleUserStatus" method="post" style="display:inline;">
                     <input type="hidden" name="userId" value="<%= utilisateur.getId() %>">
                     <% if ("actif".equals(utilisateur.getStatus())) { %>
-                    <button type="submit">Désactiver</button>
+                    <button class="btn btn-sm btn-danger" type="submit">Désactiver</button>
                     <% } else { %>
-                    <button type="submit">Activer</button>
+                    <button class="btn btn-sm btn-success" type="submit">Activer</button>
                     <% } %>
                 </form>
             </td>
@@ -67,13 +53,5 @@
         </tbody>
     </table>
 
-    <form action="${pageContext.request.contextPath}/deconnexion" method="post">
-        <button type="submit">Déconnexion</button>
-    </form>
-</main>
+<%@ include file="footer.jsp" %>
 
-<footer>
-    <p>&copy; 2024 Mon Application</p>
-</footer>
-</body>
-</html>

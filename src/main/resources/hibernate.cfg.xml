@@ -28,5 +28,7 @@
 
         <!-- Mapping files -->
         <mapping class="sn.groupeisi.jeeappli.entiies.Utilisateur"/>
+        <mapping class="sn.groupeisi.jeeappli.entiies.Immeuble"/>
+
     </session-factory>
 </hibernate-configuration>
