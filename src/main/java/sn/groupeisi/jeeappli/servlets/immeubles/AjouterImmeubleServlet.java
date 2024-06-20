@@ -44,7 +44,6 @@ public class AjouterImmeubleServlet extends HttpServlet {
             return;
         }
 
-        // Créer un nouvel objet Immeuble
         Immeuble immeuble = new Immeuble();
         immeuble.setNom(nom);
         immeuble.setAdresse(adresse);
@@ -52,14 +51,11 @@ public class AjouterImmeubleServlet extends HttpServlet {
         immeuble.setEquipements(Arrays.asList(equipementsArray));
         immeuble.setUtilisateur(utilisateur);
 
-        // Appeler la méthode d'ajout d'immeuble du DAO
         boolean ajoutReussi = immeubleDAO.ajouterImmeuble(immeuble);
 
         if (ajoutReussi) {
-            // Rediriger vers une page de confirmation ou autre
             response.sendRedirect(request.getContextPath() + "/confirmation.jsp");
         } else {
-            // Gérer l'échec d'ajout d'immeuble (redirection vers une page d'erreur par exemple)
             response.sendRedirect(request.getContextPath() + "/erreur.jsp");
         }
     }

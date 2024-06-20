@@ -1,45 +1,37 @@
 package sn.groupeisi.jeeappli;
 
-import org.hibernate.SessionFactory;
 import sn.groupeisi.jeeappli.dao.ImmeubleDAO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
 import sn.groupeisi.jeeappli.entiies.Immeuble;
-import sn.groupeisi.jeeappli.entiies.Utilisateur;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Créer une instance de SessionFactory
+        // Obtenez la SessionFactory à partir de HibernateUtil
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        // Créer une instance de ImmeubleDAO
+        // Créez une instance de ImmeubleDAO avec la SessionFactory
         ImmeubleDAO immeubleDAO = new ImmeubleDAO(sessionFactory);
 
-        // Créer un objet Utilisateur de test
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(7); // Remplacez par un identifiant d'utilisateur valide dans votre base de données
+        int immeubleIdASupprimer = 4; // Remplacez par l'ID réel de l'immeuble que vous voulez supprimer
 
-        // Appeler la méthode obtenirImmeublesPourUtilisateur
-        List<Immeuble> immeubles = immeubleDAO.obtenirImmeublesPourUtilisateur(utilisateur);
+        immeubleDAO.supprimerImmeuble(immeubleIdASupprimer);
 
-        // Vérifier si des immeubles ont été récupérés
-        if (immeubles != null && !immeubles.isEmpty()) {
-            System.out.println("Immeubles récupérés pour l'utilisateur " + utilisateur.getId() + " :");
+        verifierSuppressionImmeuble(immeubleIdASupprimer, sessionFactory);
 
-            // Parcourir et afficher les informations des immeubles
-            for (Immeuble immeuble : immeubles) {
-                System.out.println("Nom : " + immeuble.getNom());
-                System.out.println("Adresse : " + immeuble.getAdresse());
-                System.out.println("Description : " + immeuble.getDescription());
-                System.out.println("Équipements : " + immeuble.getEquipements());
-                System.out.println();
-            }
-        } else {
-            System.out.println("Aucun immeuble trouvé pour l'utilisateur " + utilisateur.getId());
-        }
-
-        // Fermer la SessionFactory
+        // N'oubliez pas de fermer la SessionFactory à la fin
         sessionFactory.close();
+    }
+
+    private static void verifierSuppressionImmeuble(int immeubleId, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            Immeuble immeuble = session.get(Immeuble.class, immeubleId);
+            if (immeuble == null) {
+                System.out.println("L'immeuble avec l'ID " + immeubleId + " a été supprimé avec succès.");
+            } else {
+                System.out.println("Attention : L'immeuble avec l'ID " + immeubleId + " existe encore.");
+            }
+        }
     }
 }

@@ -27,6 +27,7 @@
         <th>Adresse</th>
         <th>Description</th>
         <th>Équipements</th>
+        <th>Actions</th>
     </tr>
     <%
         List<Immeuble> immeubles = (List<Immeuble>) request.getAttribute("immeubles");
@@ -52,6 +53,12 @@
                     }
                 %>
             </ul>
+        </td>
+        <td>
+            <form action="${pageContext.request.contextPath}/supprimerImmeuble" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet immeuble ?');">
+                <input type="hidden" name="immeubleId" value="<%= immeuble.getId() %>">
+                <button type="submit">Supprimer</button>
+            </form>
         </td>
     </tr>
     <%

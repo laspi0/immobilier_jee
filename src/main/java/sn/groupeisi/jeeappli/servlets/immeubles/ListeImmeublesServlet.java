@@ -37,7 +37,6 @@ public class ListeImmeublesServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/connexion");
             return;
         }
-
         List<Immeuble> immeubles = immeubleDAO.obtenirImmeublesPourUtilisateur(utilisateur);
         request.setAttribute("immeubles", immeubles);
         request.getRequestDispatcher("/immeuble/index.jsp").forward(request, response);
