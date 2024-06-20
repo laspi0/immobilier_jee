@@ -15,7 +15,7 @@ import sn.groupeisi.jeeappli.entiies.Utilisateur;
 import java.io.IOException;
 import java.util.Arrays;
 
-@WebServlet("/added")
+@WebServlet("/ajouteImmeuble")
 public class AjouterImmeubleServlet extends HttpServlet {
 
     private ImmeubleDAO immeubleDAO;
@@ -66,6 +66,6 @@ public class AjouterImmeubleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user/added.jsp").forward(request, response);
+        request.getRequestDispatcher("/immeuble/ajouteImmeuble.jsp").forward(request, response);
     }
 }

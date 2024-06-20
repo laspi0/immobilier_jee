@@ -5,6 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sn.groupeisi.jeeappli.entiies.Immeuble;
 import sn.groupeisi.jeeappli.entiies.Utilisateur;
+import org.hibernate.query.Query;
+
+
+import java.util.List;
 
 public class ImmeubleDAO {
 
@@ -37,5 +41,17 @@ public class ImmeubleDAO {
             e.printStackTrace();
         }
         return false; // Retourner false en cas d'échec
+    }
+
+
+    public List<Immeuble> obtenirImmeublesPourUtilisateur(Utilisateur utilisateur) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Immeuble> query = session.createQuery("SELECT i FROM Immeuble i JOIN FETCH i.equipements WHERE i.utilisateur = :utilisateur", Immeuble.class);
+            query.setParameter("utilisateur", utilisateur);
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Ajouter un Immeuble</h1>
-<form action="${pageContext.request.contextPath}/added" method="post">
+<form action="${pageContext.request.contextPath}/ajouteImmeuble" method="post">
     <label for="nom">Nom:</label>
     <input type="text" id="nom" name="nom" required><br>
 
