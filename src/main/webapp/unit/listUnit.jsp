@@ -13,6 +13,7 @@
                     <th>Superficie</th>
                     <th>Loyer</th>
                     <th>Propriété</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,13 @@
                         <td>${unit.area}</td>
                         <td>${unit.rent}</td>
                         <td>${unit.property.name}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/editUnit?unitId=${unit.id}" class="btn btn-primary">Modifier</a>
+                            <form action="${pageContext.request.contextPath}/deleteUnit" method="post" style="display:inline;">
+                                <input type="hidden" name="unitId" value="${unit.id}">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
