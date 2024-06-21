@@ -38,66 +38,31 @@
             <div></div>
         </div>
     </div>
-
+    <br>
+    <br>
     <div class="card card-authentication1 mx-auto my-5">
         <div class="card-body">
             <div class="card-content p-2">
                 <div class="text-center">
                     <img src="${pageContext.request.contextPath}/assets/images/logo-icon.png" alt="logo icon">
                 </div>
-                <div class="card-title text-uppercase text-center py-3">INSCRIPTION</div>
-                <form action="inscription" method="post">
+                <div class="card-title text-uppercase text-center py-3">CONNEXION</div>
+                <form method="post" action="${pageContext.request.contextPath}/login">
                     <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Prenom</label>
+                        <label for="exampleInputEmail" class="sr-only">Email</label>
                         <div class="position-relative has-icon-right">
-                            <input type="text" name="prenom"  class="form-control input-shadow"
-                                   placeholder="Entrer votre prenom">
-                            <div class="form-control-position">
-                                <i class="icon-user"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Nom</label>
-                        <div class="position-relative has-icon-right">
-                            <input type="text" name="nom" id="exampleInputUsername" class="form-control input-shadow"
-                                   placeholder="Entrer votre nom">
-                            <div class="form-control-position">
-                                <i class="icon-user"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Email</label>
-                        <div class="position-relative has-icon-right">
-                            <input type="email" name="email" id="" class="form-control input-shadow"
-                                   placeholder="Entrer l'email">
-                            <div class="form-control-position">
-                                <i class="icon-user"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Role</label>
-                        <div class="position-relative has-icon-right">
-                            <select name="role" class="form-control input-shadow" required>
-                                <option value="admin">Admin</option>
-                                <option value="locataire">Locataire</option>
-                                <option value="proprietaire">Proprietaire</option>
-                            </select>
+                            <input type="email" name="email" id="exampleInputEmail" class="form-control input-shadow"
+                                   placeholder="Entrer l'email" required>
                             <div class="form-control-position">
                                 <i class="icon-user"></i>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword" class="sr-only">Password</label>
+                        <label for="exampleInputPassword" class="sr-only">Mot de passe</label>
                         <div class="position-relative has-icon-right">
-                            <input type="password" name="motDePasse" id="exampleInputPassword"
-                                   class="form-control input-shadow" placeholder="Entrer le mot de passe">
+                            <input type="password" name="password" id="exampleInputPassword"
+                                   class="form-control input-shadow" placeholder="Entrer le mot de passe" required>
                             <div class="form-control-position">
                                 <i class="icon-lock"></i>
                             </div>
@@ -108,7 +73,7 @@
             </div>
         </div>
         <div class="card-footer text-center py-3">
-            <p class="text-warning mb-0">Vous avez deja un compte? <a href="register.html">Connectez-vous ici</a></p>
+            <p class="text-warning mb-0">Vous n'avez pas de compte? <a href="/register">Inscrivez-vous ici</a></p>
         </div>
     </div>
 
@@ -123,7 +88,7 @@
         </div>
         <div class="right-sidebar-content">
 
-            <p class="mb-0">Gaussion Texture</p>
+            <p class="mb-0">Texture Gaussienne</p>
             <hr>
 
             <ul class="switcher">
@@ -135,7 +100,7 @@
                 <li id="theme6"></li>
             </ul>
 
-            <p class="mb-0">Gradient Background</p>
+            <p class="mb-0">Fond Dégradé</p>
             <hr>
 
             <ul class="switcher">

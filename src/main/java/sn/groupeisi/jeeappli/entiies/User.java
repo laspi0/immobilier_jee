@@ -2,34 +2,37 @@ package sn.groupeisi.jeeappli.entiies;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "utilisateurs")
-public class Utilisateur {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "nom")
-    private String nom;
+    @Column(name = "first_name")
+    private String firstName;
 
-    public Utilisateur() {
-        this.status = "actif";
-    }
-    @Column(name = "prenom")
-    private String prenom;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "motDePasse")
-    private String motDePasse;
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "status")
     private String status;
 
     @Column(name = "role")
     private String role;
+
+    public User() {
+        this.status = "active";
+    }
+
+    // Getters and Setters
 
     public int getId() {
         return id;
@@ -39,20 +42,20 @@ public class Utilisateur {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -63,12 +66,12 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public String getMotDePasse() {
-        return motDePasse;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getStatus() {
@@ -86,5 +89,4 @@ public class Utilisateur {
     public void setRole(String role) {
         this.role = role;
     }
-// Getters et setters
 }

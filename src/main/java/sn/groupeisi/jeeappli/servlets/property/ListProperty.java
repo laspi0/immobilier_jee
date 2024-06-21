@@ -1,4 +1,4 @@
-package sn.groupeisi.jeeappli.servlets.immeubles;
+package sn.groupeisi.jeeappli.servlets.property;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,38 +7,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
-import sn.groupeisi.jeeappli.dao.ImmeubleDAO;
+import sn.groupeisi.jeeappli.dao.PropertyDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.Immeuble;
-import sn.groupeisi.jeeappli.entiies.Utilisateur;
+import sn.groupeisi.jeeappli.entiies.Property;
+import sn.groupeisi.jeeappli.entiies.User;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/list")
-public class ListeImmeublesServlet extends HttpServlet {
+@WebServlet("/listProperties")
+public class ListProperty extends HttpServlet {
 
-    private ImmeubleDAO immeubleDAO;
+    private PropertyDAO propertyDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        immeubleDAO = new ImmeubleDAO(sessionFactory);
+        propertyDAO = new PropertyDAO(sessionFactory);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+        User user = (User) session.getAttribute("user");
 
-        if (utilisateur == null) {
+        if (user == null) {
             // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
-            response.sendRedirect(request.getContextPath() + "/connexion");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        List<Immeuble> immeubles = immeubleDAO.obtenirImmeublesPourUtilisateur(utilisateur);
-        request.setAttribute("immeubles", immeubles);
-        request.getRequestDispatcher("/immeuble/index.jsp").forward(request, response);
+
+        List<Property> properties = propertyDAO.getPropertiesForUser(user);
+        request.setAttribute("properties", properties);
+        request.getRequestDispatcher("/property/index.jsp").forward(request, response);
     }
 }

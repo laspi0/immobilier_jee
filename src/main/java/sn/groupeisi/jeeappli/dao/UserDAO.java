@@ -4,23 +4,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import sn.groupeisi.jeeappli.entiies.Utilisateur;
-
+import sn.groupeisi.jeeappli.entiies.User;
 import java.util.List;
-
-public class UtilisateurDAO {
+public class UserDAO {
 
     private final SessionFactory sessionFactory;
 
-    public UtilisateurDAO(SessionFactory sessionFactory) {
+    public UserDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public boolean inscrire(Utilisateur utilisateur) {
+    public boolean register(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.save(utilisateur);
+            session.save(user);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -32,9 +30,9 @@ public class UtilisateurDAO {
         }
     }
 
-    public Utilisateur getByEmail(String email) {
+    public User getByEmail(String email) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Utilisateur> query = session.createQuery("FROM Utilisateur WHERE email = :email", Utilisateur.class);
+            Query<User> query = session.createQuery("FROM User WHERE email = :email", User.class);
             query.setParameter("email", email);
             return query.uniqueResult();
         } catch (Exception e) {
@@ -43,17 +41,18 @@ public class UtilisateurDAO {
         }
     }
 
-    public List<Utilisateur> getAllNonAdminUsers() {
+    public List<User> getAllUsers() {
         Session session = sessionFactory.openSession();
-        List<Utilisateur> utilisateurs = null;
+        List<User> users = null;
         try {
-            String hql = "FROM Utilisateur WHERE role != 'admin'";
-            Query<Utilisateur> query = session.createQuery(hql, Utilisateur.class);
-            utilisateurs = query.getResultList();
+            String hql = "FROM User u WHERE u.role != :adminRole";
+            Query<User> query = session.createQuery(hql, User.class);
+            query.setParameter("adminRole", "admin");
+            users = query.getResultList();
         } finally {
             session.close();
         }
-        return utilisateurs;
+        return users;
     }
 
     public void toggleUserStatusById(int id) {
@@ -61,15 +60,15 @@ public class UtilisateurDAO {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            Utilisateur utilisateur = session.get(Utilisateur.class, id);
-            if (utilisateur != null) {
-                // Inverser le statut
-                if ("actif".equals(utilisateur.getStatus())) {
-                    utilisateur.setStatus("inactif");
+            User user = session.get(User.class, id);
+            if (user != null) {
+                // Toggle the status
+                if ("active".equals(user.getStatus())) {
+                    user.setStatus("inactive");
                 } else {
-                    utilisateur.setStatus("actif");
+                    user.setStatus("active");
                 }
-                session.update(utilisateur);
+                session.update(user);
             }
             transaction.commit();
         } catch (Exception e) {

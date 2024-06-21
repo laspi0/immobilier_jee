@@ -1,10 +1,10 @@
 package sn.groupeisi.jeeappli;
-
-import sn.groupeisi.jeeappli.dao.ImmeubleDAO;
+/*
+import sn.groupeisi.jeeappli.dao.PropertyDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.Immeuble;
+import sn.groupeisi.jeeappli.entiies.Property;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,11 +12,11 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         // Créez une instance de ImmeubleDAO avec la SessionFactory
-        ImmeubleDAO immeubleDAO = new ImmeubleDAO(sessionFactory);
+        PropertyDAO propertyDAO = new PropertyDAO(sessionFactory);
 
         int immeubleIdASupprimer = 4; // Remplacez par l'ID réel de l'immeuble que vous voulez supprimer
 
-        immeubleDAO.supprimerImmeuble(immeubleIdASupprimer);
+        propertyDAO.supprimerImmeuble(immeubleIdASupprimer);
 
         verifierSuppressionImmeuble(immeubleIdASupprimer, sessionFactory);
 
@@ -26,12 +26,14 @@ public class Main {
 
     private static void verifierSuppressionImmeuble(int immeubleId, SessionFactory sessionFactory) {
         try (Session session = sessionFactory.openSession()) {
-            Immeuble immeuble = session.get(Immeuble.class, immeubleId);
-            if (immeuble == null) {
+            Property property = session.get(Property.class, immeubleId);
+            if (property == null) {
                 System.out.println("L'immeuble avec l'ID " + immeubleId + " a été supprimé avec succès.");
             } else {
                 System.out.println("Attention : L'immeuble avec l'ID " + immeubleId + " existe encore.");
             }
         }
     }
-}
+}\
+
+ */

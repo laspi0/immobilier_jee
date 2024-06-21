@@ -1,5 +1,4 @@
-package sn.groupeisi.jeeappli.servlets;
-
+package sn.groupeisi.jeeappli.servlets.Unit;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,34 +7,36 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
-import sn.groupeisi.jeeappli.dao.UserDAO;
+import sn.groupeisi.jeeappli.dao.UnitDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.User;
+import sn.groupeisi.jeeappli.entiies.Unit;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/listuser")
-public class ListUser extends HttpServlet {
-    private UserDAO userDAO;
+@WebServlet("/listUnits")
+public class ListUnit extends HttpServlet {
+
+    private UnitDAO unitDAO;
 
     @Override
     public void init() throws ServletException {
-        super.init();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        userDAO = new UserDAO(sessionFactory);
+        unitDAO = new UnitDAO(sessionFactory);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = userDAO.getAllUsers();
-        for (User user : users) {
-            System.out.println("Utilisateur: " + user.getFirstName() + " " + user.getLastName());
-        }
         HttpSession session = request.getSession();
-        session.setAttribute("users", users);
-        request.getRequestDispatcher("user/listUser.jsp").forward(request, response);
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        List<Unit> units = unitDAO.getUnitsByUserId(userId);
+        request.setAttribute("units", units);
+        request.getRequestDispatcher("/unit/listUnit.jsp").forward(request, response);
     }
-
-
 }

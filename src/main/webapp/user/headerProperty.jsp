@@ -58,19 +58,22 @@
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/listAllProperties">
+                <a href="${pageContext.request.contextPath}/listProperties">
                     <i class="zmdi zmdi-home"></i> <span>Liste des immeubles</span>
                 </a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/listuser">
-                    <i class="zmdi zmdi-plus"></i> <span>Liste des utilisateurs</span>
+                <a href="${pageContext.request.contextPath}/addProperty">
+                    <i class="zmdi zmdi-plus"></i> <span>Ajouter un immeuble</span>
                 </a>
             </li>
 
-
-
+            <li>
+                <a href="${pageContext.request.contextPath}/addUnit">
+                    <i class="zmdi zmdi-plus"></i> <span>Ajouter une unite</span>
+                </a>
+            </li>
         </ul>
 
     </div>
@@ -88,7 +91,7 @@
 
             </ul>
             <div class="float-right d-flex">
-                <span>${sessionScope.user.lastName}</span>
+                ${sessionScope.user.lastName}
                 <form action="${pageContext.request.contextPath}/logout" method="post">
                     <button class="btn btn-sm btn-warning" type="submit"> Deconnexion</button>
                 </form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Connexion</title>
+    <title>Inscription</title>
     <link href="${pageContext.request.contextPath}/assets/css/pace.min.css" rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/assets/js/pace.min.js"></script>
     <!-- favicon -->
@@ -38,42 +38,78 @@
             <div></div>
         </div>
     </div>
-    <br>
-    <br>
+
     <div class="card card-authentication1 mx-auto my-5">
         <div class="card-body">
             <div class="card-content p-2">
                 <div class="text-center">
                     <img src="${pageContext.request.contextPath}/assets/images/logo-icon.png" alt="logo icon">
                 </div>
-                <div class="card-title text-uppercase text-center py-3">CONNEXION</div>
-                <form method="post" action="${pageContext.request.contextPath}/connexion">
+                <div class="card-title text-uppercase text-center py-3">INSCRIPTION</div>
+                <form action="${pageContext.request.contextPath}/register" method="post">
                     <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Username</label>
+                        <label for="exampleInputUsername" class="sr-only">Prénom</label>
                         <div class="position-relative has-icon-right">
-                            <input type="email" name="email" id="exampleInputUsername" class="form-control input-shadow"
-                                   placeholder="Entrer l'email">
+                            <input type="text" name="firstName" class="form-control input-shadow"
+                                   placeholder="Entrer votre prénom" required>
                             <div class="form-control-position">
                                 <i class="icon-user"></i>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="exampleInputPassword" class="sr-only">Password</label>
+                        <label for="exampleInputUsername" class="sr-only">Nom</label>
                         <div class="position-relative has-icon-right">
-                            <input type="password" name="motDePasse" id="exampleInputPassword"
-                                   class="form-control input-shadow" placeholder="Entrer le mot de passe">
+                            <input type="text" name="lastName" class="form-control input-shadow"
+                                   placeholder="Entrer votre nom" required>
+                            <div class="form-control-position">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail" class="sr-only">Email</label>
+                        <div class="position-relative has-icon-right">
+                            <input type="email" name="email" class="form-control input-shadow"
+                                   placeholder="Entrer l'email" required>
+                            <div class="form-control-position">
+                                <i class="icon-envelope-open"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputRole" class="sr-only">Rôle</label>
+                        <div class="position-relative has-icon-right">
+                            <select name="role" class="form-control input-shadow" required>
+                                <option value="admin">Administrateur</option>
+                                <option value="tenant">Locataire</option>
+                                <option value="owner">Propriétaire</option>
+                            </select>
+                            <div class="form-control-position">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword" class="sr-only">Mot de passe</label>
+                        <div class="position-relative has-icon-right">
+                            <input type="password" name="password" class="form-control input-shadow"
+                                   placeholder="Entrer le mot de passe" required>
                             <div class="form-control-position">
                                 <i class="icon-lock"></i>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-light btn-block">SE CONNECTER</button>
+                    <button type="submit" class="btn btn-light btn-block">S'INSCRIRE</button>
                 </form>
             </div>
         </div>
         <div class="card-footer text-center py-3">
-            <p class="text-warning mb-0">Vous n'avez pas de compte? <a href="register.html">Inscrivez-vous ici</a></p>
+            <p class="text-warning mb-0">Vous avez déjà un compte? <a href="${pageContext.request.contextPath}/login">Connectez-vous ici</a></p>
         </div>
     </div>
 
@@ -88,7 +124,7 @@
         </div>
         <div class="right-sidebar-content">
 
-            <p class="mb-0">Gaussion Texture</p>
+            <p class="mb-0">Texture Gaussienne</p>
             <hr>
 
             <ul class="switcher">
@@ -100,7 +136,7 @@
                 <li id="theme6"></li>
             </ul>
 
-            <p class="mb-0">Gradient Background</p>
+            <p class="mb-0">Fond Dégradé</p>
             <hr>
 
             <ul class="switcher">
@@ -122,7 +158,7 @@
 </div><!--wrapper-->
 
 
-<!-- JavaScript files -->
+<!-- Fichiers JavaScript -->
 <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>

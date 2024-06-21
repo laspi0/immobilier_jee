@@ -27,8 +27,11 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapping files -->
-        <mapping class="sn.groupeisi.jeeappli.entiies.Utilisateur"/>
-        <mapping class="sn.groupeisi.jeeappli.entiies.Immeuble"/>
+        <mapping class="sn.groupeisi.jeeappli.entiies.User"/>
+        <mapping class="sn.groupeisi.jeeappli.entiies.Property"/>
+        <!-- Exemple de configuration dans hibernate.cfg.xml -->
+        <mapping class="sn.groupeisi.jeeappli.entiies.Unit" />
+
 
     </session-factory>
 </hibernate-configuration>

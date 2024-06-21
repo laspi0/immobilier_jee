@@ -6,20 +6,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.SessionFactory;
-import sn.groupeisi.jeeappli.dao.UtilisateurDAO;
+import sn.groupeisi.jeeappli.dao.UserDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
 
 import java.io.IOException;
 
 @WebServlet("/toggleUserStatus")
 public class ToggleUserStatusServlet extends HttpServlet {
-    private UtilisateurDAO utilisateurDAO;
+    private UserDAO userDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        utilisateurDAO = new UtilisateurDAO(sessionFactory);
+        userDAO = new UserDAO(sessionFactory);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ToggleUserStatusServlet extends HttpServlet {
         String userIdParam = request.getParameter("userId");
         if (userIdParam != null) {
             int userId = Integer.parseInt(userIdParam);
-            utilisateurDAO.toggleUserStatusById(userId);
+            userDAO.toggleUserStatusById(userId);
         }
         response.sendRedirect("/listuser");
     }

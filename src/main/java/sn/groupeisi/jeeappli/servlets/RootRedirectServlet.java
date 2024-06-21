@@ -5,19 +5,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/deconnexion")
-public class DeconnexionServlet extends HttpServlet {
+@WebServlet("/")  // Cette servlet répondra à la racine de l'application
+public class RootRedirectServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect(request.getContextPath() + "/login");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // Récupère la session sans la créer si elle n'existe pas
-        if (session != null) {
-            session.invalidate(); // Invalide la session
-        }
-        response.sendRedirect("/connexion"); // Redirige vers la page de connexion
+        doGet(request, response);
     }
 }
