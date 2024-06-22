@@ -1,11 +1,11 @@
 package sn.groupeisi.jeeappli.servlets.property;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import sn.groupeisi.jeeappli.dao.PropertyDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
@@ -37,7 +37,7 @@ public class AddProperty extends HttpServlet {
         String[] equipmentsArray = request.getParameterValues("equipments");
 
         // Retrieve logged-in user from session
-        HttpSession session = request.getSession();
+        HttpSession session = (HttpSession) request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             // Redirect to login page if user is not logged in
