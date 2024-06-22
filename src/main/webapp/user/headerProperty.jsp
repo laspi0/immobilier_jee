@@ -68,7 +68,11 @@
                     <i class="zmdi zmdi-plus"></i> <span>Ajouter un immeuble</span>
                 </a>
             </li>
-
+            <li>
+                <a href="${pageContext.request.contextPath}/listUnits">
+                    <i class="zmdi zmdi-home"></i> <span>Liste des unites</span>
+                </a>
+            </li>
             <li>
                 <a href="${pageContext.request.contextPath}/addUnit">
                     <i class="zmdi zmdi-plus"></i> <span>Ajouter une unite</span>

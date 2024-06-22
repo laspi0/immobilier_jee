@@ -29,7 +29,7 @@
                         <td>
                             <form action="${pageContext.request.contextPath}/deleteProperty" method="post" onsubmit="return confirm('Are you sure you want to delete this property?');">
                                 <input type="hidden" name="propertyId" value="${property.id}">
-                                <button type="submit">Supprimer</button>
+                                <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
                             </form>
                         </td>
                     </tr>

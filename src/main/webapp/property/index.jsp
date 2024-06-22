@@ -36,11 +36,11 @@
                     <td>
                         <form action="${pageContext.request.contextPath}/deleteProperty" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette propriété ?');">
                             <input type="hidden" name="propertyId" value="<%= property.getId() %>">
-                            <button type="submit">Supprimer</button>
+                            <button class="btn btn-sm btn-danger m-2" type="submit">Supprimer</button>
                         </form>
                         <form action="${pageContext.request.contextPath}/editProperty" method="get">
                             <input type="hidden" name="propertyId" value="<%= property.getId() %>">
-                            <button type="submit">Modifier</button>
+                            <button class="btn-sm btn btn-primary" type="submit">Modifier</button>
                         </form>
                     </td>
                 </tr>
