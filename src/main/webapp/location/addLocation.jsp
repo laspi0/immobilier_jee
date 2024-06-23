@@ -7,7 +7,7 @@
         <div class="col-md-6 offset-3">
             <div class="card">
                 <div class="card-header">Formulaire de Location pour l'Unité ${unit.unitNumber}</div>
-                <form method="post" class="col-6 offset-3" action="${pageContext.request.contextPath}/addLocation">
+                <form method="post" class="col-10 offset-1" action="${pageContext.request.contextPath}/addLocation">
                     <div class="form-group">
                         <label for="durationMonths">Durée de la Location (en mois)</label>
                         <select id="durationMonths" name="durationMonths" class="form-control" required>
@@ -18,12 +18,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="amount">Montant de la Location (FCFA)</label>
-                        <input type="number" id="amount" name="amount" class="form-control" required readonly>
-                    </div>
-                    <div class="form-group">
                         <label for="rent">Loyer Mensuel (FCFA)</label>
                         <input type="number" id="rent" name="rent" class="form-control" value="${unit.rent}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Montant de la Location (FCFA)</label>
+                        <input type="number" id="amount" name="amount" class="form-control" required readonly>
                     </div>
                     <input type="hidden" name="unitId" value="${unit.id}">
                     <button type="submit" class="btn btn-primary">Soumettre</button>
@@ -43,12 +44,8 @@
     $(document).ready(function() {
         $('#durationMonths').on('change', function() {
             var durationMonths = $(this).val();
-            var rentPerMonth = $('#rent').val(); // Récupérez le loyer mensuel depuis l'input
-
-            // Calcul du montant total
+            var rentPerMonth = $('#rent').val();
             var totalAmount = durationMonths * rentPerMonth;
-
-            // Mettre à jour le champ de montant
             $('#amount').val(totalAmount);
         });
     });

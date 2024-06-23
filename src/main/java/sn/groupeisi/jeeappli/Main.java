@@ -1,39 +1,40 @@
 package sn.groupeisi.jeeappli;
-/*
-import sn.groupeisi.jeeappli.dao.PropertyDAO;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
+import sn.groupeisi.jeeappli.dao.LocationDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.Property;
+import sn.groupeisi.jeeappli.entiies.Location;
+import sn.groupeisi.jeeappli.entiies.User;
+
+import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        // Obtenez la SessionFactory à partir de HibernateUtil
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        try {
 
-        // Créez une instance de ImmeubleDAO avec la SessionFactory
-        PropertyDAO propertyDAO = new PropertyDAO(sessionFactory);
+            LocationDAO locationDAO = new LocationDAO(HibernateUtil.getSessionFactory());
+            List<Object[]> locationRequests = locationDAO.getAllPendingLocationRequests();
+            for (Object[] request : locationRequests) {
+                Location location = (Location) request[0];
+                User user = (User) request[1];
+                String propertyName = (String) request[2];
+                String propertyAddress = (String) request[3];
+                int durationMonths = (int) request[4];
+                double amount = (double) request[5];
 
-        int immeubleIdASupprimer = 4; // Remplacez par l'ID réel de l'immeuble que vous voulez supprimer
-
-        propertyDAO.supprimerImmeuble(immeubleIdASupprimer);
-
-        verifierSuppressionImmeuble(immeubleIdASupprimer, sessionFactory);
-
-        // N'oubliez pas de fermer la SessionFactory à la fin
-        sessionFactory.close();
-    }
-
-    private static void verifierSuppressionImmeuble(int immeubleId, SessionFactory sessionFactory) {
-        try (Session session = sessionFactory.openSession()) {
-            Property property = session.get(Property.class, immeubleId);
-            if (property == null) {
-                System.out.println("L'immeuble avec l'ID " + immeubleId + " a été supprimé avec succès.");
-            } else {
-                System.out.println("Attention : L'immeuble avec l'ID " + immeubleId + " existe encore.");
+                System.out.println("Location ID: " + location.getId());
+                System.out.println("User: " + user.getFirstName() + " " + user.getLastName());
+                System.out.println("Property Name: " + propertyName);
+                System.out.println("Property Address: " + propertyAddress);
+                System.out.println("Duration Months: " + durationMonths);
+                System.out.println("Amount: " + amount);
+                System.out.println("------------------------");
             }
+
+            // Fermeture de la session Hibernate
+            HibernateUtil.shutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-}\
-
- */
+}
