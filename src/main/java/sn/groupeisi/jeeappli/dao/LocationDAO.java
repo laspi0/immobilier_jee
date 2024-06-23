@@ -47,6 +47,27 @@ public class LocationDAO {
         return locationRequests;
     }
 
+    public void updateLocationStatus(Long locationId, String status) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Location location = session.get(Location.class, locationId);
+            if (location != null) {
+                location.setStatus(status);
+                session.update(location);
+                transaction.commit();
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 
 
 }

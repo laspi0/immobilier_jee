@@ -14,6 +14,7 @@
             <th>Début de Location</th>
             <th>Durée (mois)</th>
             <th>Montant (FCFA)</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,16 @@
                 <td>${locationRequest[0].startDate}</td> <!-- Date de début de location -->
                 <td>${locationRequest[0].durationMonths}</td> <!-- Durée en mois -->
                 <td>${locationRequest[0].amount}</td> <!-- Montant -->
+                <td>
+                    <form action="updateLocationStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="locationId" value="${locationRequest[0].id}">
+                        <button type="submit" name="action" value="accept" class="btn btn-success">Accepter</button>
+                    </form>
+                    <form action="updateLocationStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="locationId" value="${locationRequest[0].id}">
+                        <button type="submit" name="action" value="refuse" class="btn btn-danger">Refuser</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
