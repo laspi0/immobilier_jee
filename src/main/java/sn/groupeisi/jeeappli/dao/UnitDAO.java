@@ -134,5 +134,15 @@ public class UnitDAO {
         }
     }
 
+    public Unit getUnitById(Long id) {
+        Session session = sessionFactory.openSession();
+        try {
+            return session.get(Unit.class, id);
+        } finally {
+            session.close();
+        }
+    }
+
+
 
 }

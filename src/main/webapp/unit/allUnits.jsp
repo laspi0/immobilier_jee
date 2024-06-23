@@ -57,7 +57,7 @@
                 <td>${unit.rent}</td>
                 <td>${unit.property.name} - ${unit.property.address}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/rentForm?unitId=${unit.id}" class="btn btn-success">Louer</a>
+                    <a href="${pageContext.request.contextPath}/addLocation?unitId=${unit.id}" class="btn btn-success">Louer</a>
                 </td>
             </tr>
         </c:forEach>

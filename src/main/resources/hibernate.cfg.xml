@@ -31,6 +31,7 @@
         <mapping class="sn.groupeisi.jeeappli.entiies.Property"/>
         <!-- Exemple de configuration dans hibernate.cfg.xml -->
         <mapping class="sn.groupeisi.jeeappli.entiies.Unit" />
+        <mapping class="sn.groupeisi.jeeappli.entiies.Location" />
 
 
     </session-factory>

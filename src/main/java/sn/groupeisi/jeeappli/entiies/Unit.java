@@ -36,6 +36,7 @@ public class Unit {
 
     @Column(name = "user_id")
     private int userId;
+
     // Constructors
     public Unit() {
     }
@@ -96,4 +97,7 @@ public class Unit {
     public void setProperty(Property property) {
         this.property = property;
     }
+
+
 }
+
