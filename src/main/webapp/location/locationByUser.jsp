@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/user/headerProperty.jsp" %>
+<%@ include file="/user/headerRent.jsp" %>
 
 <div class="container">
-    <h2>Liste des Demandes de Location en Attente</h2>
+    <h2>Liste des Demandes de Location</h2>
 
     <table class="table table-striped">
         <thead>
@@ -14,7 +14,7 @@
             <th>Début de Location</th>
             <th>Durée (mois)</th>
             <th>Montant (FCFA)</th>
-            <th>Actions</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -26,15 +26,7 @@
                 <td>${locationRequest[0].startDate}</td> <!-- Date de début de location -->
                 <td>${locationRequest[0].durationMonths}</td> <!-- Durée en mois -->
                 <td>${locationRequest[0].amount}</td> <!-- Montant -->
-                <td>
-                    <form action="${pageContext.request.contextPath}/updateLocationStatus" method="post">
-                        <input type="hidden" name="locationId" value="${locationRequest[0].id}" />
-                        <input type="hidden" name="unitId" value="${locationRequest[0].unit.id}" />
-                        <input type="hidden" name="userId" value="${locationRequest[1].id}" />
-                        <button type="submit" name="status" value="accepte" class="btn btn-success">Accepter</button>
-                        <button type="submit" name="status" value="refuse" class="btn btn-danger">Refuser</button>
-                    </form>
-                </td>
+                <td>${locationRequest[0].status}</td> <!-- Status -->
             </tr>
         </c:forEach>
         </tbody>

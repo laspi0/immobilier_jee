@@ -74,6 +74,11 @@
                 </a>
             </li>
             <li class="list-unstyled">
+                <a href="${pageContext.request.contextPath}/listLocation">
+                    <i class="zmdi zmdi-home"></i> <span>Demande de locations</span>
+                </a>
+            </li>
+            <li class="list-unstyled">
                 <a href="${pageContext.request.contextPath}/addUnit">
                     <i class="zmdi zmdi-plus"></i> <span>Ajouter une unite</span>
                 </a>

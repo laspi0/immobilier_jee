@@ -80,4 +80,11 @@ public class UserDAO {
             session.close();
         }
     }
+
+
+    public User getUserById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(User.class, id);
+        }
+    }
 }

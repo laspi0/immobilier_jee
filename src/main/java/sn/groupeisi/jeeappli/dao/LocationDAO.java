@@ -69,5 +69,28 @@ public class LocationDAO {
     }
 
 
+    public List<Object[]> getAllLocationRequestsByUser(Long userId) {
+        Session session = sessionFactory.openSession();
+        List<Object[]> locationRequests = null;
+        try {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT l, u, p.name, p.address, l.durationMonths, l.amount " +
+                    "FROM Location l " +
+                    "JOIN l.user u " +
+                    "JOIN l.unit u2 " +
+                    "JOIN u2.property p " +
+                    "WHERE u.id = :userId");
+            query.setParameter("userId", userId);
+            locationRequests = query.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return locationRequests;
+    }
+
+
 
 }
