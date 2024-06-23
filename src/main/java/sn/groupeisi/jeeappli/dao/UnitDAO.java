@@ -3,6 +3,7 @@ package sn.groupeisi.jeeappli.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import sn.groupeisi.jeeappli.entiies.Unit;
 
 import java.util.List;
@@ -90,12 +91,48 @@ public class UnitDAO {
         }
     }
 
-    public List<Unit> getAllUnits() {
-        Session session = sessionFactory.openSession();
-        try {
-            return session.createQuery("from Unit", Unit.class).list();
-        } finally {
-            session.close();
+    public List<Unit> getFilteredUnits(Double minPrice, Double maxPrice, String address, Integer numberOfRooms) {
+        try (Session session = sessionFactory.openSession()) {
+            StringBuilder queryBuilder = new StringBuilder("from Unit u where 1=1");
+
+            if (minPrice != null) {
+                queryBuilder.append(" and u.rent >= :minPrice");
+            }
+            if (maxPrice != null) {
+                queryBuilder.append(" and u.rent <= :maxPrice");
+            }
+            if (address != null && !address.isEmpty()) {
+                queryBuilder.append(" and u.property.address like :address");
+            }
+            if (numberOfRooms != null) {
+                queryBuilder.append(" and u.numberOfRooms = :numberOfRooms");
+            }
+
+            Query<Unit> query = session.createQuery(queryBuilder.toString(), Unit.class);
+
+            if (minPrice != null) {
+                query.setParameter("minPrice", minPrice);
+            }
+            if (maxPrice != null) {
+                query.setParameter("maxPrice", maxPrice);
+            }
+            if (address != null && !address.isEmpty()) {
+                query.setParameter("address", "%" + address + "%");
+            }
+            if (numberOfRooms != null) {
+                query.setParameter("numberOfRooms", numberOfRooms);
+            }
+
+            return query.list();
         }
     }
+
+
+    public List<String> getDistinctAddresses() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("select distinct u.property.address from Unit u", String.class).list();
+        }
+    }
+
+
 }

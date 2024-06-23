@@ -7,6 +7,10 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+
+<%--    <link href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" rel="stylesheet">--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>--%>
     <!-- loader-->
     <link href="/assets/css/pace.min.css" rel="stylesheet"/>
     <script src="/assets/js/pace.min.js"></script>
@@ -20,6 +24,8 @@
     <link href="/assets/css/icons.css" rel="stylesheet" type="text/css"/>
     <!-- Custom Style -->
     <link href="/assets/css/app-style.css" rel="stylesheet"/>
+
+
 
     <!--favicon-->
     <!-- simplebar CSS-->
