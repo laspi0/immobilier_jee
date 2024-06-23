@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
             if ("admin".equals(role)) {
                 response.sendRedirect("/listuser");
             } else if ("tenant".equals(role)) {
-                response.sendRedirect("tenant/welcome_tenant.jsp");
+                response.sendRedirect("/allUnits");
             } else if ("owner".equals(role)) {
                 response.sendRedirect("/listProperties");
             } else {

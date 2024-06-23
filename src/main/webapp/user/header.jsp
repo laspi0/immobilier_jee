@@ -34,6 +34,11 @@
 </head>
 
 <body class="bg-theme bg-theme2">
+<style>
+   body{
+       list-style-type: none;
+   }
+</style>
 
 <!-- start loader -->
 <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
@@ -50,20 +55,19 @@
             </a>
         </div>
         <ul class="sidebar-menu do-nicescrol">
-            <li class="sidebar-header">MAIN NAVIGATION</li>
-            <li>
+            <li class="list-unstyled" class="sidebar-header">MAIN NAVIGATION</li>
+            <li class="list-unstyled">
                 <a href="index.html">
                     <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
 
-            <li>
+            <li class="list-unstyled">
                 <a href="${pageContext.request.contextPath}/listAllProperties">
                     <i class="zmdi zmdi-home"></i> <span>Liste des immeubles</span>
                 </a>
             </li>
-
-            <li>
+            <li class="list-unstyled">
                 <a href="${pageContext.request.contextPath}/listuser">
                     <i class="zmdi zmdi-plus"></i> <span>Liste des utilisateurs</span>
                 </a>
