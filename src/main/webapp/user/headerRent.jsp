@@ -24,8 +24,6 @@
     <!-- Custom Style -->
     <link href="/assets/css/app-style.css" rel="stylesheet"/>
 
-
-
     <!--favicon-->
     <!-- simplebar CSS-->
     <link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>

@@ -4,6 +4,7 @@
 
 <div class="container">
     <h2>Mes Paiements</h2>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -12,6 +13,7 @@
             <th>Nombre de Mois</th>
             <th>Montant (FCFA)</th>
             <th>Statut</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -24,12 +26,20 @@
                         <td>${payment[2]}</td> <!-- Nombre de Mois -->
                         <td>${payment[3]}</td> <!-- Montant -->
                         <td>${payment[4]}</td> <!-- Statut -->
+                        <td>
+                            <c:if test="${payment[4] == 'en attente'}">
+                                <form action="${pageContext.request.contextPath}/updatePaymentStatus" method="post">
+                                    <input type="hidden" name="paymentId" value="${payment[5]}" />
+                                    <button type="submit" class="btn btn-success">Payer</button>
+                                </form>
+                            </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
             </c:when>
             <c:otherwise>
                 <tr>
-                    <td colspan="5">Aucun paiement trouvé</td>
+                    <td colspan="6">Aucun paiement trouvé</td>
                 </tr>
             </c:otherwise>
         </c:choose>

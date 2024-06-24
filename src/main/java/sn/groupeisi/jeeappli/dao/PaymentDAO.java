@@ -55,7 +55,7 @@ public class PaymentDAO {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            String hql = "SELECT p.paymentDate, u.unitNumber, l.durationMonths, l.amount, p.status " +
+            String hql = "SELECT p.paymentDate, u.unitNumber, l.durationMonths, l.amount, p.status, p.id " +
                     "FROM Payment p " +
                     "LEFT JOIN p.unit u " +
                     "LEFT JOIN p.location l " +
@@ -78,6 +78,27 @@ public class PaymentDAO {
 
         return payments;
     }
+
+
+    public void updatePaymentStatus(long paymentId, String newStatus) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Payment payment = session.get(Payment.class, paymentId);
+            if (payment != null) {
+                payment.setStatus(newStatus);
+                session.update(payment);
+                transaction.commit();
+            }
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 
 }
 
