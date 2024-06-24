@@ -69,6 +69,11 @@
                 </a>
             </li>
             <li class="list-unstyled">
+                <a href="${pageContext.request.contextPath}/userPayment">
+                    <i class="zmdi zmdi-plus"></i> <span>Mes paiemnets</span>
+                </a>
+            </li>
+            <li class="list-unstyled">
                 <a href="${pageContext.request.contextPath}/locationByUser">
                     <i class="zmdi zmdi-plus"></i> <span>Demande de locations</span>
                 </a>

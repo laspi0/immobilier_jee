@@ -25,7 +25,6 @@ public class UpdateLocationStatus extends HttpServlet {
     private UnitDAO unitDAO;
     private UserDAO userDAO;
 
-
     @Override
     public void init() throws ServletException {
         super.init();
@@ -42,15 +41,15 @@ public class UpdateLocationStatus extends HttpServlet {
             String status = request.getParameter("status");
             Long unitId = Long.parseLong(request.getParameter("unitId"));
             Long userId = Long.parseLong(request.getParameter("userId"));
+
             locationDAO.updateLocationStatus(locationId, status);
             HttpSession session = request.getSession(true);
 
             if ("accepte".equals(status)) {
                 Unit unit = unitDAO.getUnitById(unitId);
                 User user = userDAO.getUserById(userId);
-                paymentDAO.addPayment(unit, user);
+                paymentDAO.addPayment(unit, user, locationId);
             }
-
             response.sendRedirect(request.getContextPath() + "/listLocation");
         } catch (Exception e) {
             throw new ServletException("Error processing request", e);
@@ -63,3 +62,4 @@ public class UpdateLocationStatus extends HttpServlet {
         HibernateUtil.shutdown();
     }
 }
+

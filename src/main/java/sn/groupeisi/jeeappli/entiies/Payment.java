@@ -18,6 +18,10 @@ public class Payment {
     private Date paymentDate;
 
     @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @ManyToOne
     @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
 
@@ -60,6 +64,14 @@ public class Payment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getStatus() {

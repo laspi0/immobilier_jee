@@ -3,9 +3,7 @@ package sn.groupeisi.jeeappli.servlets.Payment;
 import org.hibernate.SessionFactory;
 import sn.groupeisi.jeeappli.dao.PaymentDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.Payment;
 import sn.groupeisi.jeeappli.entiies.User;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +25,16 @@ public class UserPayment extends HttpServlet {
         paymentDAO = new PaymentDAO(sessionFactory);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
-        List<Payment> payments = paymentDAO.getAllPaymentsForUser(user);
+
+        if (user == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        List<Object[]> payments = paymentDAO.getAllPaymentsForUser(user);
         request.setAttribute("payments", payments);
         request.getRequestDispatcher("/payment/userPayment.jsp").forward(request, response);
     }

@@ -4,25 +4,35 @@
 
 <div class="container">
     <h2>Mes Paiements</h2>
-
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Date de Paiement</th>
+            <th>Numéro d'Unité</th>
             <th>Nombre de Mois</th>
             <th>Montant (FCFA)</th>
             <th>Statut</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="payment" items="${payments}">
-            <tr>
-                <td>${payment.paymentDate}</td>
-                <td>${payment.unit.durationMonths}</td>
-                <td>${payment.unit.amount}</td>
-                <td>${payment.status}</td>
-            </tr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${not empty payments}">
+                <c:forEach var="payment" items="${payments}">
+                    <tr>
+                        <td>${payment[0]}</td> <!-- Date de Paiement -->
+                        <td>${payment[1]}</td> <!-- Numéro d'Unité -->
+                        <td>${payment[2]}</td> <!-- Nombre de Mois -->
+                        <td>${payment[3]}</td> <!-- Montant -->
+                        <td>${payment[4]}</td> <!-- Statut -->
+                    </tr>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td colspan="5">Aucun paiement trouvé</td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
         </tbody>
     </table>
 </div>
