@@ -60,7 +60,6 @@
         <ul class="sidebar-menu do-nicescrol">
             <li class="list-unstyled" class="sidebar-header">MAIN NAVIGATION</li>
 
-
             <li class="list-unstyled">
                 <a href="${pageContext.request.contextPath}/allUnits">
                     <i class="zmdi zmdi-plus"></i> <span>Liste des unites</span>

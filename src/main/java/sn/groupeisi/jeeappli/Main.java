@@ -1,40 +1,59 @@
 package sn.groupeisi.jeeappli;
 
-import sn.groupeisi.jeeappli.dao.LocationDAO;
+import org.hibernate.SessionFactory;
+import sn.groupeisi.jeeappli.dao.PaymentDAO;
 import sn.groupeisi.jeeappli.database.HibernateUtil;
-import sn.groupeisi.jeeappli.entiies.Location;
-import sn.groupeisi.jeeappli.entiies.User;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        try {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        PaymentDAO paymentDAO = new PaymentDAO(sessionFactory);
 
-            LocationDAO locationDAO = new LocationDAO(HibernateUtil.getSessionFactory());
-            List<Object[]> locationRequests = locationDAO.getAllPendingLocationRequests();
-            for (Object[] request : locationRequests) {
-                Location location = (Location) request[0];
-                User user = (User) request[1];
-                String propertyName = (String) request[2];
-                String propertyAddress = (String) request[3];
-                int durationMonths = (int) request[4];
-                double amount = (double) request[5];
+        // Suppose ownerId est l'ID du propriétaire dont vous voulez obtenir les paiements
+        int ownerId = 2;
 
-                System.out.println("Location ID: " + location.getId());
-                System.out.println("User: " + user.getFirstName() + " " + user.getLastName());
-                System.out.println("Property Name: " + propertyName);
-                System.out.println("Property Address: " + propertyAddress);
+        // Récupérer la liste des paiements pour le propriétaire spécifié
+        List<Object[]> payments = paymentDAO.getPaymentsForOwner(ownerId);
+
+        // Vérifier si la liste de paiements n'est pas null avant de l'itérer
+        if (payments != null) {
+            payments.forEach(payment -> {
+                // Traiter chaque paiement ici
+                // Vous pouvez accéder aux éléments de l'array `payment` comme suit :
+                Date paymentDate = (Date) payment[0];
+                String unitNumber = (String) payment[1];
+                int durationMonths = ((Number) payment[2]).intValue();
+
+                // Vérifier le type de la colonne amount et convertir si nécessaire
+                BigDecimal amount;
+                if (payment[3] instanceof BigDecimal) {
+                    amount = (BigDecimal) payment[3];
+                } else if (payment[3] instanceof Double) {
+                    amount = BigDecimal.valueOf((Double) payment[3]);
+                } else {
+                    amount = BigDecimal.ZERO; // ou une autre valeur par défaut appropriée
+                }
+
+                String status = (String) payment[4];
+
+                // Afficher ou traiter les informations du paiement
+                System.out.println("Payment Date: " + paymentDate);
+                System.out.println("Unit Number: " + unitNumber);
                 System.out.println("Duration Months: " + durationMonths);
                 System.out.println("Amount: " + amount);
-                System.out.println("------------------------");
-            }
-
-            // Fermeture de la session Hibernate
-            HibernateUtil.shutdown();
-        } catch (Exception e) {
-            e.printStackTrace();
+                System.out.println("Status: " + status);
+                System.out.println("----------------------");
+            });
+        } else {
+            System.out.println("Aucun paiement trouvé pour le propriétaire avec ID " + ownerId);
         }
+
+        // Fermer la SessionFactory
+        HibernateUtil.shutdown();
     }
 }

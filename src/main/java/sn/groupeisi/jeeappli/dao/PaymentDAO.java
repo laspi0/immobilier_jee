@@ -100,5 +100,24 @@ public class PaymentDAO {
     }
 
 
+    public List<Object[]> getPaymentsForOwner(int ownerId) {
+        List<Object[]> results;
+        try (Session session = sessionFactory.openSession()) {
+            String sql = "SELECT p.payment_date, u.unit_number, l.duration_months, l.amount, p.status " +
+                    "FROM payments p " +
+                    "INNER JOIN locations l ON p.location_id = l.id " +
+                    "INNER JOIN units u ON l.unit_id = u.id " +
+                    "INNER JOIN users o ON u.user_id = o.id " +
+                    "WHERE o.id = :ownerId";
+
+            results = session.createNativeQuery(sql)
+                    .setParameter("ownerId", ownerId)
+                    .list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            results = null;
+        }
+        return results;
+    }
 }
 
