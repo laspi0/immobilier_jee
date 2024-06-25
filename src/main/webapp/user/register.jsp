@@ -48,10 +48,10 @@
                 <div class="card-title text-uppercase text-center py-3">INSCRIPTION</div>
                 <form action="${pageContext.request.contextPath}/register" method="post">
                     <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Prénom</label>
+                        <label for="exampleInputUsername" class="sr-only">Prenom</label>
                         <div class="position-relative has-icon-right">
                             <input type="text" name="firstName" class="form-control input-shadow"
-                                   placeholder="Entrer votre prénom" required>
+                                   placeholder="Entrer votre prenom" required>
                             <div class="form-control-position">
                                 <i class="icon-user"></i>
                             </div>
@@ -86,7 +86,7 @@
                             <select name="role" class="form-control input-shadow" required>
                                 <option value="admin">Administrateur</option>
                                 <option value="tenant">Locataire</option>
-                                <option value="owner">Propriétaire</option>
+                                <option value="owner">Proprietaire</option>
                             </select>
                             <div class="form-control-position">
                                 <i class="icon-user"></i>
@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="card-footer text-center py-3">
-            <p class="text-warning mb-0">Vous avez déjà un compte? <a href="${pageContext.request.contextPath}/login">Connectez-vous ici</a></p>
+            <p class="text-warning mb-0">Vous avez dejà un compte? <a href="${pageContext.request.contextPath}/login">Connectez-vous ici</a></p>
         </div>
     </div>
 

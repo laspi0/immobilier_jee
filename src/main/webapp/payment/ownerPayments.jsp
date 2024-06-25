@@ -1,14 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-    <title>Owner Payments</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-</head>
-<body>
-<h2>Payments</h2>
+<%@ include file="/user/header.jsp" %>
 
-<table border="1">
+<div class="container">
+    <h2>Mes Paiements</h2>
+
+    <table class="table table-striped">
     <thead>
     <tr>
         <th>Payment Date</th>
@@ -30,6 +27,6 @@
     </c:forEach>
     </tbody>
 </table>
+</div>
 
-</body>
-</html>
+<%@ include file="/user/footer.jsp" %>

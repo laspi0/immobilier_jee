@@ -82,6 +82,10 @@
                 <a href="${pageContext.request.contextPath}/addUnit">
                     <i class="zmdi zmdi-plus"></i> <span>Ajouter une unite</span>
                 </a>
+            </li> <li class="list-unstyled">
+                <a href="${pageContext.request.contextPath}/ownerPayments">
+                    <i class="zmdi zmdi-plus"></i> <span>Mes paiements</span>
+                </a>
             </li>
         </ul>
 
