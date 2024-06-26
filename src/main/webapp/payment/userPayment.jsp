@@ -1,50 +1,44 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/user/header.jsp" %>
+<%@ include file="/user/headerRent.jsp" %>
 
-<div class="container">
-    <h2>Mes Paiements</h2>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Date de Paiement</th>
-            <th>Numéro d'Unité</th>
-            <th>Nombre de Mois</th>
-            <th>Montant (FCFA)</th>
-            <th>Statut</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:choose>
-            <c:when test="${not empty payments}">
-                <c:forEach var="payment" items="${payments}">
+<div class="row">
+    <div class="col-md-12 my-4">
+        <h2 class="h4 mb-1">Mes Paiements</h2>
+        <p class="mb-3">detailed information</p>
+        <div class="card shadow">
+            <div class="card-body">
+                <!-- table -->
+                <table class="table table-hover table-borderless border-v">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>${payment[0]}</td> <!-- Date de Paiement -->
-                        <td>${payment[1]}</td> <!-- Numéro d'Unité -->
-                        <td>${payment[2]}</td> <!-- Nombre de Mois -->
-                        <td>${payment[3]}</td> <!-- Montant -->
-                        <td>${payment[4]}</td> <!-- Statut -->
-                        <td>
-                            <c:if test="${payment[4] == 'en attente'}">
-                                <form action="${pageContext.request.contextPath}/updatePaymentStatus" method="post">
-                                    <input type="hidden" name="paymentId" value="${payment[5]}" />
-                                    <button type="submit" class="btn btn-success">Payer</button>
-                                </form>
-                            </c:if>
-                        </td>
+                        <th>Date de Paiement</th>
+                        <th>Numéro d'Unité</th>
+                        <th>Durée (mois)</th>
+                        <th>Montant</th>
+                        <th>Status</th>
                     </tr>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <tr>
-                    <td colspan="6">Aucun paiement trouvé</td>
-                </tr>
-            </c:otherwise>
-        </c:choose>
-        </tbody>
-    </table>
-</div>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="payment" items="${payments}">
+                        <tr class="accordion-toggle collapsed" id="c-${payment[0]}" data-toggle="collapse" data-parent="#c-${payment[0]}" href="#collap-${payment[0]}">
+                            <td><c:out value="${payment[0]}"/></td>
+                            <td><c:out value="${payment[1]}"/></td>
+                            <td><c:out value="${payment[2]}"/></td>
+                            <td><c:out value="${payment[3]}"/></td>
+                            <td><c:out value="${payment[4]}"/></td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${empty payments}">
+                        <tr>
+                            <td colspan="5">Aucun paiement trouvé</td>
+                        </tr>
+                    </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> <!-- end section -->
 
 <%@ include file="/user/footer.jsp" %>
