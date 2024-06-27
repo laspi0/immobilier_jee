@@ -42,16 +42,16 @@ public class AddLocation extends HttpServlet {
         int durationMonths = Integer.parseInt(request.getParameter("durationMonths"));
         double amount = Double.parseDouble(request.getParameter("amount"));
 
-        UnitDAO unitDAO = new UnitDAO(HibernateUtil.getSessionFactory()); // Instanciation de UnitDAO
-        Unit unit = unitDAO.getUnitById(unitId); // Récupération de l'unité par ID
+        UnitDAO unitDAO = new UnitDAO(HibernateUtil.getSessionFactory());
+        Unit unit = unitDAO.getUnitById(unitId);
 
-        LocalDate startDate = LocalDate.now(); // Date de début de la location
+        LocalDate startDate = LocalDate.now();
 
         Location newLocation = new Location(startDate, durationMonths, amount, "en attente", unit, user);
 
         locationDAO.saveLocation(newLocation);
 
-        response.sendRedirect(request.getContextPath() + "/rentConfirmation.jsp");
+        response.sendRedirect(request.getContextPath() + "/locationByUser");
     }
 
 

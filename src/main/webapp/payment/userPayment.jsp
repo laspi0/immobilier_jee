@@ -17,6 +17,7 @@
                         <th>Durée (mois)</th>
                         <th>Montant</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,14 @@
                             <td><c:out value="${payment[2]}"/></td>
                             <td><c:out value="${payment[3]}"/></td>
                             <td><c:out value="${payment[4]}"/></td>
+                            <td>
+                                <c:if test="${payment[4] == 'en attente'}">
+                                    <form action="${pageContext.request.contextPath}/updatePaymentStatus" method="post">
+                                        <input type="hidden" name="paymentId" value="${payment[5]}" />
+                                        <button type="submit" class="btn btn-success">Payer</button>
+                                    </form>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:forEach>
                     <c:if test="${empty payments}">

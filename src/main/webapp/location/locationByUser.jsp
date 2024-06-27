@@ -30,7 +30,19 @@
                             <td>${locationRequest[0].startDate}</td> <!-- Date de début de location -->
                             <td>${locationRequest[0].durationMonths}</td> <!-- Durée en mois -->
                             <td>${locationRequest[0].amount}</td> <!-- Montant -->
-                            <td>${locationRequest[0].status}</td> <!-- Status -->
+                            <td>
+                                <c:choose>
+                                    <c:when test="${locationRequest[0].status == 'accepte'}">
+                                        <span class="badge badge-success">Accepté</span>
+                                    </c:when>
+                                    <c:when test="${locationRequest[0].status == 'refuse'}">
+                                        <span class="badge badge-danger">Refusé</span>
+                                    </c:when>
+                                    <c:when test="${locationRequest[0].status == 'en attente'}">
+                                        <span class="badge badge-warning">En attente</span>
+                                    </c:when>
+                                </c:choose>
+                            </td>
                         </tr>
                     </c:forEach>
                     <c:if test="${empty locationRequests}">

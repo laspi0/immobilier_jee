@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12 my-4">
         <h2 class="h4 mb-1">Liste des Unités de Location</h2>
-        <p class="mb-3">detailed information</p>
+        <p class="mb-3">Informations détaillées</p>
         <div class="card shadow">
             <div class="card-body">
                 <!-- Formulaire de filtre -->
@@ -26,9 +26,15 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="price-range">Plage de prix (FCFA)</label>
-                            <input type="text" id="price-range" name="price-range" value="" />
-                            <input type="hidden" id="minPrice" name="minPrice">
-                            <input type="hidden" id="maxPrice" name="maxPrice">
+                            <div class="price-range-slider">
+                                <input type="range" id="minPriceRange" name="minPriceRange" min="0" max="500000" step="1000" value="0">
+                                <input type="range" id="maxPriceRange" name="maxPriceRange" min="0" max="500000" step="1000" value="500000">
+                            </div>
+                            <div class="price-range-values">
+                                <span id="minPriceDisplay">0</span> FCFA - <span id="maxPriceDisplay">500,000</span> FCFA
+                            </div>
+                            <input type="hidden" id="minPrice" name="minPrice" value="0">
+                            <input type="hidden" id="maxPrice" name="maxPrice" value="500000">
                         </div>
                         <div class="col-md-1 mb-3">
                             <button type="submit" class="btn btn-primary">Filtrer</button>
@@ -76,20 +82,27 @@
 </div> <!-- end section -->
 
 <script>
-    $(document).ready(function () {
-        $("#price-range").ionRangeSlider({
-            type: "double",
-            min: 0,
-            max: 1000000,
-            from: 0,
-            to: 1000000,
-            step: 1000,
-            grid: true,
-            prefix: "FCFA ",
-            onFinish: function (data) {
-                $("#minPrice").val(data.from);
-                $("#maxPrice").val(data.to);
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        var minPriceRange = document.getElementById('minPriceRange');
+        var maxPriceRange = document.getElementById('maxPriceRange');
+        var minPriceDisplay = document.getElementById('minPriceDisplay');
+        var maxPriceDisplay = document.getElementById('maxPriceDisplay');
+        var minPrice = document.getElementById('minPrice');
+        var maxPrice = document.getElementById('maxPrice');
+
+        // Initialize the displayed values
+        minPriceDisplay.textContent = minPriceRange.value;
+        maxPriceDisplay.textContent = maxPriceRange.value;
+
+        // Update the hidden inputs and displayed values on input change
+        minPriceRange.addEventListener('input', function () {
+            minPriceDisplay.textContent = minPriceRange.value;
+            minPrice.value = minPriceRange.value;
+        });
+
+        maxPriceRange.addEventListener('input', function () {
+            maxPriceDisplay.textContent = maxPriceRange.value;
+            maxPrice.value = maxPriceRange.value;
         });
     });
 </script>

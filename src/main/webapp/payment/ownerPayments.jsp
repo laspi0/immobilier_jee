@@ -26,7 +26,16 @@
                             <td><c:out value="${payment[1]}"/></td>
                             <td><c:out value="${payment[2]}"/></td>
                             <td><c:out value="${payment[3]}"/></td>
-                            <td><c:out value="${payment[4]}"/></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${payment[4] == 'payé'}">
+                                        <span class="badge badge-success">Payé</span>
+                                    </c:when>
+                                    <c:when test="${payment[4] == 'en attente'}">
+                                        <span class="badge badge-warning">En attente</span>
+                                    </c:when>
+                                </c:choose>
+                            </td>
                         </tr>
                     </c:forEach>
                     <c:if test="${empty payments}">
